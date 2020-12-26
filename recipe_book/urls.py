@@ -23,6 +23,7 @@ urlpatterns = [
   # path('welcome/', WelcomeView.as_view()),
   path('admin/', admin.site.urls),
   path('', views.home, name='home'),
+  path('callback', views.callback, name='callback'),
   path('signin', views.sign_in, name='signin'),
   path('signout', views.sign_out, name='signout'),
 ]
