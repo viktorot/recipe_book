@@ -4,4 +4,4 @@ migrate:
 	python3 manage.py migrate
 
 devsrv:
-	python3 manage.py runserver 0.0.0.0:8000
+	export SECRET_KEY=123; python3 manage.py runserver 127.0.0.1:8000
