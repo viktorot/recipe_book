@@ -1,4 +1,4 @@
 from django.views.generic import TemplateView
 
-class WelcomeView(TemplateView):
+class WelcomePage(TemplateView):
     template_name = 'welcome.html'
