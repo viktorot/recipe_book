@@ -1,7 +1,5 @@
 import yaml
 import msal
-import os
-import time
 
 # Load the oauth_settings.yml file
 stream = open('oauth.yml', 'r')
@@ -50,14 +48,6 @@ def get_token_from_code(request):
   save_cache(request, cache)
 
   return result
-
-def store_user(request, user):
-  request.session['user'] = {
-    'is_authenticated': True,
-    'name': user['displayName'],
-    'email': user['mail'] if (user['mail'] != None) else user['userPrincipalName'],
-    'timeZone': user['mailboxSettings']['timeZone']
-  }
 
 def get_token(request):
   cache = load_cache(request)

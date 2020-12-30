@@ -1,29 +1,14 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.urls import reverse
-from datetime import datetime, timedelta
-from dateutil import tz, parser
-from .auth_helper import get_sign_in_flow, get_token_from_code, store_user, remove_user_and_token, get_token
-from .user_helper import get_user
+from .auth.oauth_utils import get_sign_in_flow, get_token_from_code, remove_user_and_token
+from .auth import auth_manager
+from . import user_helper
+from .utils.context_utils import get_base_context
 
 def home(request):
-  context = initialize_context(request)
-
+  context = get_base_context(request)
   return render(request, 'home.html', context)
-
-def initialize_context(request):
-  context = {}
-
-  # Check for any errors in the session
-  error = request.session.pop('flash_error', None)
-
-  if error != None:
-    context['errors'] = []
-    context['errors'].append(error)
-
-  # Check for user in the session
-  context['user'] = request.session.get('user', {'is_authenticated': False})
-  return context
 
 def sign_in(request):
   # Get the sign-in flow
@@ -44,8 +29,8 @@ def callback(request):
   result = get_token_from_code(request)
 
   #Get the user's profile
-  user = get_user(result['access_token'])
+  user = user_helper.get_user(result['access_token'])
 
   # Store user
-  store_user(request, user)
+  auth_manager.store_user(request, user)
   return HttpResponseRedirect(reverse('home'))
