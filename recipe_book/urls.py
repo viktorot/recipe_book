@@ -16,13 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
-from .pages.welcome import WelcomePage
+from .pages.create_recipe_page import CreateRecipePage
 from . import views
 
 urlpatterns = [
   path('admin/', admin.site.urls),
   path('', views.home, name='home'),
-  path('welcome/', WelcomePage.as_view(), name='welcome'),
+  path('welcome/', CreateRecipePage.as_view(), name='welcome'),
   path('callback', views.callback, name='callback'),
   path('signin', views.sign_in, name='signin'),
   path('signout', views.sign_out, name='signout'),

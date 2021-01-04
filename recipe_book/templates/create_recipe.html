@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block script %}
+<!-- <script type="text/javascript">
+    Spruce.store('toast', {
+        toasts: ['111', '222', '333'],
+        add(msg) {
+            this.toasts.push(msg)
+        },
+        remove(index) {
+            this.toasts.splice(index, 1)
+        }
+    })
+</script> -->
+{% endblock %}
+
+{% block content %}
+
+<form method="POST" action=".">
+    {% csrf_token %}
+    {{ recipe.form.as_p }}
+    <input type=submit value="Save">
+</form>
+
+<hr/>
+
+<!-- <div class="card">
+    <div class="card-header">To create a new recipe, fill out the required files below</div>
+    <div class="card-body">
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input id="exampleInputEmail1" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" value="{{ recipe.title }}">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+        </form>
+    </div>
+</div> -->
+
+<!-- <div x-data="{ store: $store.toast }">
+    <button @click="store.add('mike')">Add</button>
+    <template x-for="(toast, index) in store.toasts">
+        <div @click="store.remove(index)">
+            <span x-text="toast" style="color: blueviolet"></span>
+        </div>
+    </template>
+</div> -->
+{% endblock %}
